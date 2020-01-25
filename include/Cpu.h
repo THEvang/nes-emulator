@@ -4,6 +4,9 @@
 
 class Cpu {
 public:
+
+    void execute();
+
     using Program_counter =  uint16_t;
     using Stack_pointer = uint8_t;
     using Byte = uint8_t;
@@ -15,6 +18,8 @@ public:
     Byte index_x;
     Byte index_y;
     Byte status;
+
+    Memory* memory;
 
     int cycles = 0;
 
