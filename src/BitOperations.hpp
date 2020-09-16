@@ -21,11 +21,11 @@ void clear_bit(T& value, int n) {
 }
 
 template <typename T>
-void is_set(T value, int n) {
+bool is_set(T value, int n) {
 
     static_assert(std::is_integral<T>::value);
     
     const auto mask = (1 << n);
 
-    return (value & mask != 0);
+    return ((value & mask) != 0);
 }
