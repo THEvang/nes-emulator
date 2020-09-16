@@ -1,30 +1,5 @@
-#include <Opcodes.h>
-#include <BitOperations.h>
-
-void LDA(Cpu& cpu, Addressing_mode addressing_mode) {
-
-    uint8_t operand = 0;
-    switch(addressing_mode) {
-        case Addressing_mode::Immediate:
-            operand = cpu.memory->read(cpu.program_counter + 1);
-            cpu.program_counter += 2;
-            cpu.cycles += 2;
-            break;
-        case Addressing_mode::Zero_page:
-            uint16_t operand_address = cpu.memory->read(cpu.program_counter + 1);
-            operand = cpu.memory->read(operand_address);
-            cpu.program_counter += 2;
-            cpu.cycles += 2;
-            break;
-        case Addressing_mode::Zero_page_x:
-        
-        case Addressing_mode::Absolute:
-            uint16_t address = (cpu.memory->read(cpu.program_counter+2) << 8) | cpu.memory->read(cpu.program_counter+1); 
-            operand = cpu.memory->read(address);
-            cpu.program_counter += 3;
-            cpu.cycles += 4;
-    }
-}
+#include "Opcodes.hpp"
+#include "BitOperations.hpp"
 
 void CLC(Cpu& cpu) {
 

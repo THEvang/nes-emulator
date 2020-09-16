@@ -1,4 +1,6 @@
-#include <Cpu.h>
+#pragma once
+
+#include "Cpu.hpp"
 
 enum class Addressing_mode {
     Immediate,
@@ -11,7 +13,6 @@ enum class Addressing_mode {
     Implied,
     Accumulator,
     Indexed,
-    Zero_page,
     Indirect,
     Indirect_x,
     Indirect_y,
