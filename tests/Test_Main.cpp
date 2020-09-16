@@ -37,10 +37,18 @@ public:
     using Stack_Pointer = uint16_t;
     Stack_Pointer sp = 0xFD;
 
+    using Program_Counter = uint16_t;
+    Program_Counter pc = 0x00;
+
 private:
 
     std::array<uint8_t, 4> m_registers {0, 0, 0, 0x34};
 };
+
+int immediate(Cpu& cpu) {
+    cpu.pc++;
+    return 0;
+}
 
 
 SCENARIO("Given a Cpu") {
@@ -87,4 +95,17 @@ SCENARIO("Given a Cpu") {
     THEN("Negative flag is not set") {
         REQUIRE(!cpu.test_flag(Cpu::Flag::Negative)); 
     }
+}
+
+SCENARIO("Given Addressing modes") {
+    Cpu cpu;
+    const auto pc = cpu.pc;
+
+    WHEN("Addressing immediate byte") {
+        auto data = immediate(cpu);
+        THEN("Program Counter is increased by one") {
+            REQUIRE(cpu.pc == (pc + 1));
+        }
+    }
+
 }
